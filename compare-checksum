@@ -1,0 +1,14 @@
+#!/bin/bash
+#Runs the sha function. The first argument provided completes the sha command to select either sha256 or sha512sum.
+#The second argument provided is the file which we will compare the hash file to.
+
+ 
+calcSum=$(sha${1} $2 | grep -o '^\S*')
+echo "Please provide the hash you would like to compare to (either 256 or 512sum):"
+read inputSum
+if [[ "$calcSum" = "$inputSum" ]]
+then
+	echo 'Success the calculated checksum matches the checksum you provided.'
+else
+	echo "Crickey! The calculated checksum does not match the checksum you provided. Remember to not include any spaces. If you are sure you have provided the correct checksum then someone or something has changed in your file!"
+fi
